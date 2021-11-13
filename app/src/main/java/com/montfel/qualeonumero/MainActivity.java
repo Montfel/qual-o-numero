@@ -113,19 +113,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void realizaPalpite() {
         btnEnviar.setOnClickListener(view -> {
-            fazRequisicaoDeNumeroAleatorio();
-//            palpite = Integer.parseInt(etPalpite.getText().toString());
-//            tvStatus.setVisibility(View.VISIBLE);
-//            tvNumero.setText(String.valueOf(palpite));
-//            if (num < palpite) {
-//                tvStatus.setText(R.string.menor);
-//            } else if (num > palpite) {
-//                tvStatus.setText(R.string.maior);
-//            } else {
-//                tvStatus.setText(R.string.acertou);
-//                btnNovaPartida.setVisibility(View.VISIBLE);
-//                btnEnviar.setEnabled(false);
-//            }
+//            fazRequisicaoDeNumeroAleatorio();
+            palpite = Integer.parseInt(etPalpite.getText().toString());
+            tvStatus.setVisibility(View.VISIBLE);
+            tvNumero.setText(String.valueOf(palpite));
+            if (num < palpite) {
+                tvStatus.setText(R.string.menor);
+            } else if (num > palpite) {
+                tvStatus.setText(R.string.maior);
+            } else {
+                tvStatus.setText(R.string.acertou);
+                btnNovaPartida.setVisibility(View.VISIBLE);
+                btnEnviar.setEnabled(false);
+            }
         });
     }
 
