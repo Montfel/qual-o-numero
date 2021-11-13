@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Qual é o número?</string>
+    <string name="menor">É menor</string>
+    <string name="maior">É maior</string>
+    <string name="acertou">Acertou</string>
+    <string name="qual_numero">Qual é o número?</string>
+    <string name="alterar_tamanho_do_texto">Alterar tamanho do texto</string>
+    <string name="alterar_cor_do_texto">Alterar cor do texto</string>
+</resources>

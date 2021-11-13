@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuTamanhoTexto"
+        android:icon="@drawable/ic_baseline_text_fields_24"
+        android:orderInCategory="100"
+        android:title="@string/alterar_tamanho_do_texto"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menuCorTexto"
+        android:icon="@drawable/ic_baseline_color_lens_24"
+        android:orderInCategory="100"
+        android:title="@string/alterar_cor_do_texto"
+        app:showAsAction="always" />
+
+</menu>
