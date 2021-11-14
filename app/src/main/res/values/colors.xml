@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="rosa_claro">#EA1E63</color>
     <color name="rosa_escuro">#AF174A</color>
+    <color name="cinza_claro">#F0F2F1</color>
 </resources>

@@ -1,4 +1,4 @@
-package com.montfel.qualeonumero;
+package com.montfel.qualeonumero.model;
 
 public class Numero {
     private String value;
@@ -18,6 +18,6 @@ public class Numero {
     }
 
     public String toString() {
-        return getValue();
+        return getValue() + " " + getError() + " " + getStatusCode() ;
     }
 }
