@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private int numero;
     private int palpite;
     private Slider sliderTamanhoTexto;
-    private View included1, included2, included3;
+    private View included1, included2;
     private View top, top_left, top_right, middle, bottom_left, bottom_right, bottom;
     private View top2, top_left2, top_right2, middle2, bottom_left2, bottom_right2, bottom2;
     private View top3, top_left3, top_right3, middle3, bottom_left3, bottom_right3, bottom3;
@@ -54,14 +55,17 @@ public class MainActivity extends AppCompatActivity {
         jogaNovamente();
     }
 
+    //Exibe os menus na Appbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_configuracao_texto, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    //Configura ações aos botões ao serem pressionados
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Verifica se o item selecionado foi o menu de alterar texto
         if (item.getItemId() == R.id.menuTamanhoTexto) {
             boolean isSliderVisible = sliderTamanhoTexto.getVisibility() == View.VISIBLE;
 
@@ -77,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
-            Toast.makeText(getApplicationContext(), "Cor", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -93,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         sliderTamanhoTexto = findViewById(R.id.sliderTamanhoTexto);
         included1 = findViewById(R.id.included1);
         included2 = findViewById(R.id.included2);
-        included3 = findViewById(R.id.included3);
 
         top = findViewById(R.id.top);
         top_left = findViewById(R.id.top_left);
@@ -119,12 +120,16 @@ public class MainActivity extends AppCompatActivity {
         bottom_right3 = findViewById(R.id.bottom_right3);
         bottom3 = findViewById(R.id.bottom3);
 
-        sliderTamanhoTexto.setValue(3);
+        //Inicia invisível ou Gone elementos que só aparecerão devido a alguma interação do usuário
         tvStatus.setVisibility(View.INVISIBLE);
         btnNovaPartida.setVisibility(View.INVISIBLE);
         included1.setVisibility(View.GONE);
         included2.setVisibility(View.GONE);
 
+        //Inicia o slider com o tamanho médio
+        sliderTamanhoTexto.setValue(3);
+
+        //Configura para aparecer o número zero ao iniciar o aplicativo
         middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
     }
 
@@ -135,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //Muda o textView para indicar o comprimento do input ao passo que o usuário interage com o campo de texto
                 String tamanho = charSequence.length() + getString(R.string.slash_3);
                 tvQtdNumeros.setText(tamanho);
             }
@@ -177,10 +183,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void realizaPalpite() {
         btnEnviar.setOnClickListener(view -> {
+            //Verifica se o editText é nulo ao pressionar o botão
             if (!etPalpite.getText().toString().equals("")) {
                 palpite = Integer.parseInt(etPalpite.getText().toString());
                 tvStatus.setVisibility(View.VISIBLE);
+                //Mostra o número do palpite na tela a partir dos leds
                 pintaLed(palpite);
+                //Muda o status a depender do palpite do usuário
                 if (numero < palpite) {
                     tvStatus.setText(R.string.menor);
                 } else if (numero > palpite) {
@@ -196,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void jogaNovamente() {
         btnNovaPartida.setOnClickListener(view -> {
+            //Realiza outra requisição, esconde o botão de nova partida e desbloqueia o botão de enviar palpite
             btnNovaPartida.setVisibility(View.INVISIBLE);
             btnEnviar.setEnabled(true);
             configuraRetrofit();
@@ -229,28 +239,27 @@ public class MainActivity extends AppCompatActivity {
 
         included1.setVisibility(View.VISIBLE);
         included2.setVisibility(View.VISIBLE);
-        included2.setVisibility(View.VISIBLE);
 
         String nume = String.valueOf(numero);
 
         if (numero < 10) {
             included1.setVisibility(View.GONE);
             included2.setVisibility(View.GONE);
-            switchLed(nume.substring(nume.length() - 1), top3, top_left3, top_right3, middle3,
-                    bottom_left3, bottom_right3, bottom3);
+            switchLed(nume.substring(nume.length() - 1),
+                    top3, top_left3, top_right3, middle3, bottom_left3, bottom_right3, bottom3);
         } else if (numero < 100) {
             included1.setVisibility(View.GONE);
-            switchLed(nume.substring(nume.length() - 2, nume.length() - 1), top2, top_left2,
-                    top_right2, middle2, bottom_left2, bottom_right2, bottom2);
-            switchLed(nume.substring(nume.length() - 1), top3, top_left3,
-                    top_right3, middle3, bottom_left3, bottom_right3, bottom3);
+            switchLed(nume.substring(nume.length() - 2, nume.length() - 1),
+                    top2, top_left2, top_right2, middle2, bottom_left2, bottom_right2, bottom2);
+            switchLed(nume.substring(nume.length() - 1),
+                    top3, top_left3, top_right3, middle3, bottom_left3, bottom_right3, bottom3);
         } else {
-            switchLed(nume.substring(nume.length() - 3,nume.length() - 2), top, top_left, top_right,
-                    middle, bottom_left, bottom_right, bottom);
-            switchLed(nume.substring(nume.length() - 2, nume.length() - 1), top2, top_left2,
-                    top_right2, middle2, bottom_left2, bottom_right2, bottom2);
-            switchLed(nume.substring(nume.length() - 1), top3, top_left3, top_right3, middle3,
-                    bottom_left3, bottom_right3, bottom3);
+            switchLed(nume.substring(nume.length() - 3,nume.length() - 2),
+                    top, top_left, top_right, middle, bottom_left, bottom_right, bottom);
+            switchLed(nume.substring(nume.length() - 2, nume.length() - 1),
+                    top2, top_left2, top_right2, middle2, bottom_left2, bottom_right2, bottom2);
+            switchLed(nume.substring(nume.length() - 1),
+                    top3, top_left3, top_right3, middle3, bottom_left3, bottom_right3, bottom3);
         }
     }
 

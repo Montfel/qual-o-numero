@@ -65,7 +65,7 @@ public class LedSeteSegmentos extends View {
     }
 
     private void setupPaint() {
-        paint = new Paint();
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color);
     }
@@ -74,4 +74,6 @@ public class LedSeteSegmentos extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+
+
 }
