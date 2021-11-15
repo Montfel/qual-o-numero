@@ -46,42 +46,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(getString(R.string.qual_numero));
+
         inicializaComponentes();
         trataInput();
+        configuraRetrofit();
         realizaPalpite();
         jogaNovamente();
-        configuraRetrofit();
-    }
-
-    private void configuraRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://us-central1-ss-devops.cloudfunctions.net/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-        Call<Numero> call = jsonPlaceHolderApi.getNumero();
-
-        call.enqueue(new Callback<Numero>() {
-            @Override
-            public void onResponse(Call<Numero> call, Response<Numero> response) {
-                if (!response.isSuccessful()) {
-                    tvStatus.setVisibility(View.VISIBLE);
-                    tvStatus.setText(R.string.erro);
-                    pintaLed(response.code());
-                    btnNovaPartida.setVisibility(View.VISIBLE);
-                    btnEnviar.setEnabled(false);
-                } else {
-                    numero = Integer.parseInt(response.body().getValue());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Numero> call, Throwable t) {
-                Log.i("TAG", "onFailure: " + t.getMessage());
-            }
-        });
     }
 
     @Override
@@ -179,11 +149,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void jogaNovamente() {
-        btnNovaPartida.setOnClickListener(view -> {
-            btnNovaPartida.setVisibility(View.INVISIBLE);
-            btnEnviar.setEnabled(true);
-            configuraRetrofit();
+    private void configuraRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://us-central1-ss-devops.cloudfunctions.net/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        Call<Numero> call = jsonPlaceHolderApi.getNumero();
+
+        call.enqueue(new Callback<Numero>() {
+            @Override
+            public void onResponse(Call<Numero> call, Response<Numero> response) {
+                if (!response.isSuccessful()) {
+                    tvStatus.setVisibility(View.VISIBLE);
+                    tvStatus.setText(R.string.erro);
+                    pintaLed(response.code());
+                    btnNovaPartida.setVisibility(View.VISIBLE);
+                    btnEnviar.setEnabled(false);
+                } else {
+                    numero = Integer.parseInt(response.body().getValue());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Numero> call, Throwable t) {
+                Log.i("TAG", "onFailure: " + t.getMessage());
+            }
         });
     }
 
@@ -206,6 +199,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void jogaNovamente() {
+        btnNovaPartida.setOnClickListener(view -> {
+            btnNovaPartida.setVisibility(View.INVISIBLE);
+            btnEnviar.setEnabled(true);
+            configuraRetrofit();
+        });
+    }
+
     public void pintaLed(int numero) {
         top.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         top_left.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
@@ -214,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         bottom_right.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         bottom.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+
         top2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         top_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
@@ -221,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         bottom_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+
         top3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
         top_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
@@ -238,8 +241,8 @@ public class MainActivity extends AppCompatActivity {
         if (numero < 10) {
             included1.setVisibility(View.GONE);
             included2.setVisibility(View.GONE);
-            switchLed(nume.substring(nume.length() - 1), top3, top_left3,
-                    top_right3, middle3, bottom_left3, bottom_right3, bottom3);
+            switchLed(nume.substring(nume.length() - 1), top3, top_left3, top_right3, middle3,
+                    bottom_left3, bottom_right3, bottom3);
         } else if (numero < 100) {
             included1.setVisibility(View.GONE);
             switchLed(nume.substring(nume.length() - 2, nume.length() - 1), top2, top_left2,
@@ -247,8 +250,8 @@ public class MainActivity extends AppCompatActivity {
             switchLed(nume.substring(nume.length() - 1), top3, top_left3,
                     top_right3, middle3, bottom_left3, bottom_right3, bottom3);
         } else {
-            switchLed(nume.substring(nume.length() - 3,nume.length() - 2), top, top_left,
-                    top_right, middle, bottom_left, bottom_right, bottom);
+            switchLed(nume.substring(nume.length() - 3,nume.length() - 2), top, top_left, top_right,
+                    middle, bottom_left, bottom_right, bottom);
             switchLed(nume.substring(nume.length() - 2, nume.length() - 1), top2, top_left2,
                     top_right2, middle2, bottom_left2, bottom_right2, bottom2);
             switchLed(nume.substring(nume.length() - 1), top3, top_left3, top_right3, middle3,
