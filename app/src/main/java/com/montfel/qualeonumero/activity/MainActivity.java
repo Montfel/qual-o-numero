@@ -62,30 +62,24 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuTamanhoTexto:
-                if (sliderTamanhoTexto.getVisibility() == View.VISIBLE) {
-                    sliderTamanhoTexto.setVisibility(View.INVISIBLE);
-                } else {
-                    sliderTamanhoTexto.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), "Clique novamente para fechar", Toast.LENGTH_SHORT).show();
-                }
+        if (item.getItemId() == R.id.menuTamanhoTexto) {
+            boolean sliderVisivel = sliderTamanhoTexto.getVisibility() == View.VISIBLE;
 
-                sliderTamanhoTexto.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
-                    @Override
-                    public void onStartTrackingTouch(@NonNull Slider slider) {}
+            sliderTamanhoTexto.setVisibility(sliderVisivel ? View.INVISIBLE : View.VISIBLE);
 
-                    @Override
-                    public void onStopTrackingTouch(@NonNull Slider slider) {
+            sliderTamanhoTexto.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+                @Override
+                public void onStartTrackingTouch(@NonNull Slider slider) {}
+
+                @Override
+                public void onStopTrackingTouch(@NonNull Slider slider) {
 //                        tvNumero.setTextSize((slider.getValue() * 20) + 40);
-                    }
-                });
-
-                break;
-            case R.id.menuCorTexto:
-                Toast.makeText(getApplicationContext(), "Cor", Toast.LENGTH_SHORT).show();
-                break;
+                }
+            });
+        } else {
+            Toast.makeText(getApplicationContext(), "Cor", Toast.LENGTH_SHORT).show();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
