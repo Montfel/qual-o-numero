@@ -7,12 +7,13 @@
         <entry key="..\:/AndroidStudioProjects/Qualeonumero/app/src/main/res/menu/menu_tamanho_texto.xml" value="0.38333333333333336" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.4036458333333333" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/drawable/ic_baseline_text_fields_24.xml" value="0.4036458333333333" />
-        <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/fragment_led.xml" value="0.21666666666666667" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentos.xml" value="0.75" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentos2.xml" value="0.31801801801801804" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentos3.xml" value="0.31801801801801804" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentosteste.xml" value="0.9" />
+        <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/teste.xml" value="0.33153153153153153" />
       </map>
     </option>
   </component>
