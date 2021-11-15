@@ -5,93 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <View
         android:id="@+id/top3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="10dp"
         app:layout_constraintBottom_toTopOf="@+id/middle3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_baseline_remove_24"
-        app:tint="@color/rosa_claro" />
+        android:background="@color/rosa_claro" />
 
-    <ImageView
+    <View
         android:id="@+id/top_left3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:rotation="90"
+        android:layout_width="10dp"
+        android:layout_height="40dp"
+        android:background="@color/rosa_claro"
         app:layout_constraintBottom_toTopOf="@+id/bottom_left3"
-        app:layout_constraintEnd_toStartOf="@+id/top_right3"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@+id/top3"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top3"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_baseline_remove_24"
-        app:tint="@color/rosa_claro" />
+        app:layout_constraintTop_toTopOf="@+id/top3"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-
-    <ImageView
+    <View
         android:id="@+id/top_right3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:rotation="90"
+        android:layout_width="10dp"
+        android:layout_height="40dp"
+        android:background="@color/rosa_claro"
         app:layout_constraintBottom_toTopOf="@+id/bottom_right3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/top_left3"
-        app:layout_constraintTop_toBottomOf="@+id/top3"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/ic_baseline_remove_24"
-        app:tint="@color/rosa_claro" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/top3"
+        app:layout_constraintTop_toTopOf="@+id/top3"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-    <ImageView
+    <View
         android:id="@+id/middle3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/rosa_claro"
         app:layout_constraintBottom_toTopOf="@+id/bottom3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top3"
-        app:srcCompat="@drawable/ic_baseline_remove_24"
-        app:tint="@color/rosa_claro" />
+        app:layout_constraintTop_toBottomOf="@+id/top3" />
 
-    <ImageView
+    <View
         android:id="@+id/bottom_left3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:rotation="90"
-        app:layout_constraintBottom_toTopOf="@+id/bottom3"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_right3"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_width="10dp"
+        android:layout_height="40dp"
+        android:background="@color/rosa_claro"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom3"
+        app:layout_constraintEnd_toStartOf="@+id/bottom3"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_left3"
-        app:srcCompat="@drawable/ic_baseline_remove_24"
-        app:tint="@color/rosa_claro" />
+        app:layout_constraintTop_toBottomOf="@+id/top_left3" />
 
-    <ImageView
+    <View
         android:id="@+id/bottom_right3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:rotation="90"
-        app:layout_constraintBottom_toTopOf="@+id/bottom3"
+        android:layout_width="10dp"
+        android:layout_height="40dp"
+        android:background="@color/rosa_claro"
+        app:layout_constraintBottom_toBottomOf="@+id/bottom3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bottom_left3"
-        app:layout_constraintTop_toBottomOf="@+id/top_right3"
-        app:srcCompat="@drawable/ic_baseline_remove_24"
-        app:tint="@color/rosa_claro" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/bottom3"
+        app:layout_constraintTop_toBottomOf="@+id/top_right3" />
 
-    <ImageView
+    <View
         android:id="@+id/bottom3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="10dp"
+        android:background="@color/rosa_claro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/middle3"
-        app:srcCompat="@drawable/ic_baseline_remove_24"
-        app:tint="@color/rosa_claro" />
+        app:layout_constraintTop_toBottomOf="@+id/middle3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

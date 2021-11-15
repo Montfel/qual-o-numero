@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private int palpite;
     private Slider sliderTamanhoTexto;
     private View included1, included2, included3;
-    private ImageView top, top_left, top_right, middle, bottom_left, bottom_right, bottom;
-    private ImageView top2, top_left2, top_right2, middle2, bottom_left2, bottom_right2, bottom2;
-    private ImageView top3, top_left3, top_right3, middle3, bottom_left3, bottom_right3, bottom3;
+    private View top, top_left, top_right, middle, bottom_left, bottom_right, bottom;
+    private View top2, top_left2, top_right2, middle2, bottom_left2, bottom_right2, bottom2;
+    private View top3, top_left3, top_right3, middle3, bottom_left3, bottom_right3, bottom3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         included1.setVisibility(View.GONE);
         included2.setVisibility(View.GONE);
 
-        middle3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+        middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
     }
 
     private void trataInput() {
@@ -190,43 +190,45 @@ public class MainActivity extends AppCompatActivity {
 
     private void realizaPalpite() {
         btnEnviar.setOnClickListener(view -> {
-            palpite = Integer.parseInt(etPalpite.getText().toString());
-            tvStatus.setVisibility(View.VISIBLE);
-            pintaLed(palpite);
-            if (numero < palpite) {
-                tvStatus.setText(R.string.menor);
-            } else if (numero > palpite) {
-                tvStatus.setText(R.string.maior);
-            } else {
-                tvStatus.setText(R.string.acertou);
-                btnNovaPartida.setVisibility(View.VISIBLE);
-                btnEnviar.setEnabled(false);
+            if (!etPalpite.getText().toString().equals("")) {
+                palpite = Integer.parseInt(etPalpite.getText().toString());
+                tvStatus.setVisibility(View.VISIBLE);
+                pintaLed(palpite);
+                if (numero < palpite) {
+                    tvStatus.setText(R.string.menor);
+                } else if (numero > palpite) {
+                    tvStatus.setText(R.string.maior);
+                } else {
+                    tvStatus.setText(R.string.acertou);
+                    btnNovaPartida.setVisibility(View.VISIBLE);
+                    btnEnviar.setEnabled(false);
+                }
             }
         });
     }
 
     public void pintaLed(int numero) {
-        top.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top_left.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top_right.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        middle.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom_left.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom_right.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top2.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top_left2.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top_right2.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        middle2.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom_left2.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom_right2.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom2.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top3.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top_left3.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        top_right3.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        middle3.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom_left3.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom_right3.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
-        bottom3.setColorFilter(ContextCompat.getColor(this, R.color.rosa_claro));
+        top.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top_left.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top_right.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        middle.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom_right.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        middle2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        top_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
+        bottom3.setBackgroundColor(ContextCompat.getColor(this, R.color.rosa_claro));
 
         included1.setVisibility(View.VISIBLE);
         included2.setVisibility(View.VISIBLE);
@@ -252,135 +254,135 @@ public class MainActivity extends AppCompatActivity {
     private void switchLed1(String numero) {
         switch (numero) {
             case "1":
-                top.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                top_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "2":
-                top_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_right.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_right.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "3":
-                top_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "4":
-                top.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "5":
-                top_right.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_right.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "6":
-                top_right.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_right.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "7":
-                top_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "8":
                 break;
             case "9":
-                bottom_left.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "0":
-                middle.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
         }
     }
     private void switchLed2(String numero) {
         switch (numero) {
             case "1":
-                top2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                top_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "2":
-                top_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_right2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "3":
-                top_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "4":
-                top2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "5":
-                top_right2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "6":
-                top_right2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "7":
-                top_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "8":
                 break;
             case "9":
-                bottom_left2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "0":
-                middle2.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
         }
     }
     private void switchLed3(String numero) {
         switch (numero) {
             case "1":
-                top3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                top_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "2":
-                top_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_right3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "3":
-                top_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "4":
-                top3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "5":
-                top_right3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "6":
-                top_right3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "7":
-                top_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "8":
                 break;
             case "9":
-                bottom_left3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
             case "0":
-                middle3.setColorFilter(ContextCompat.getColor(this, R.color.cinza_claro));
+                middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
         }
     }

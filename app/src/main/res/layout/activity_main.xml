@@ -23,33 +23,35 @@
     <include
         android:id="@+id/included1"
         layout="@layout/led_sete_segmentos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/included2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/included2"
         layout="@layout/led_sete_segmentos2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/included3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/included1"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="visible"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/included3"
         layout="@layout/led_sete_segmentos3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -101,6 +103,7 @@
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Status"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -113,6 +116,7 @@
         android:id="@+id/btnNovaPartida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/nova_partida"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"

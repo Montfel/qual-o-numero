@@ -9,9 +9,10 @@
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/drawable/ic_baseline_text_fields_24.xml" value="0.4036458333333333" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/fragment_led.xml" value="0.21666666666666667" />
-        <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentos.xml" value="0.5922150139017609" />
+        <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentos.xml" value="0.75" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentos2.xml" value="0.31801801801801804" />
         <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentos3.xml" value="0.31801801801801804" />
+        <entry key="..\:/AndroidStudioProjects/qual-o-numero/app/src/main/res/layout/led_sete_segmentosteste.xml" value="0.9" />
       </map>
     </option>
   </component>
@@ -20,5 +21,8 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
   </component>
 </project>
