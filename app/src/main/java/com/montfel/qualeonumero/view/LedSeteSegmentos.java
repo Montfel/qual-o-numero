@@ -3,7 +3,6 @@ package com.montfel.qualeonumero.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -15,8 +14,8 @@ import com.montfel.qualeonumero.R;
 
 public class LedSeteSegmentos extends View {
     private int color;
-    private int width = 100;
-    private int height = 400;
+    private static final int width = 100;
+    private static final int height = 400;
     private Paint paint;
 
     public LedSeteSegmentos(Context context) {
@@ -62,7 +61,7 @@ public class LedSeteSegmentos extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(0, 0, width, height, paint);
+        canvas.drawRect(50, 50, width, height, paint);
     }
 
     private void setupPaint() {

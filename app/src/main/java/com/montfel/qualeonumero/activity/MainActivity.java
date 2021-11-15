@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private View top, top_left, top_right, middle, bottom_left, bottom_right, bottom;
     private View top2, top_left2, top_right2, middle2, bottom_left2, bottom_right2, bottom2;
     private View top3, top_left3, top_right3, middle3, bottom_left3, bottom_right3, bottom3;
+    private final String BASE_URL = "https://us-central1-ss-devops.cloudfunctions.net/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle(getString(R.string.qual_numero));
 
         inicializaComponentes();
-        trataInput();
+        mostraTamanhoInput();
         configuraRetrofit();
         realizaPalpite();
         jogaNovamente();
@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menuTamanhoTexto) {
-            boolean sliderVisivel = sliderTamanhoTexto.getVisibility() == View.VISIBLE;
+            boolean isSliderVisible = sliderTamanhoTexto.getVisibility() == View.VISIBLE;
 
-            sliderTamanhoTexto.setVisibility(sliderVisivel ? View.INVISIBLE : View.VISIBLE);
+            sliderTamanhoTexto.setVisibility(isSliderVisible ? View.INVISIBLE : View.VISIBLE);
 
             sliderTamanhoTexto.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
                 @Override
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 //                        tvNumero.setTextSize((slider.getValue() * 20) + 40);
                 }
             });
+
         } else {
             Toast.makeText(getApplicationContext(), "Cor", Toast.LENGTH_SHORT).show();
         }
@@ -127,14 +128,14 @@ public class MainActivity extends AppCompatActivity {
         middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
     }
 
-    private void trataInput() {
+    private void mostraTamanhoInput() {
         etPalpite.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String tamanho = charSequence.length() + "/3";
+                String tamanho = charSequence.length() + getString(R.string.slash_3);
                 tvQtdNumeros.setText(tamanho);
             }
 
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configuraRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://us-central1-ss-devops.cloudfunctions.net/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<Numero>() {
             @Override
-            public void onResponse(Call<Numero> call, Response<Numero> response) {
+            public void onResponse(@NonNull Call<Numero> call, @NonNull Response<Numero> response) {
                 if (!response.isSuccessful()) {
                     tvStatus.setVisibility(View.VISIBLE);
                     tvStatus.setText(R.string.erro);
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Numero> call, Throwable t) {
+            public void onFailure(@NonNull Call<Numero> call, @NonNull Throwable t) {
                 Log.i("TAG", "onFailure: " + t.getMessage());
             }
         });
