@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     btnEnviar.setEnabled(false);
                 } else {
                     numero = Integer.parseInt(response.body().getValue());
-                    Log.i("TAG", "onResponse: " + numero);
                 }
             }
 
@@ -239,19 +238,26 @@ public class MainActivity extends AppCompatActivity {
         if (numero < 10) {
             included1.setVisibility(View.GONE);
             included2.setVisibility(View.GONE);
-            switchLed3(nume.substring(nume.length() - 1));
+            switchLed(nume.substring(nume.length() - 1), top3, top_left3,
+                    top_right3, middle3, bottom_left3, bottom_right3, bottom3);
         } else if (numero < 100) {
             included1.setVisibility(View.GONE);
-            switchLed2(nume.substring(nume.length() - 2, nume.length() - 1));
-            switchLed3(nume.substring(nume.length() - 1));
+            switchLed(nume.substring(nume.length() - 2, nume.length() - 1), top2, top_left2,
+                    top_right2, middle2, bottom_left2, bottom_right2, bottom2);
+            switchLed(nume.substring(nume.length() - 1), top3, top_left3,
+                    top_right3, middle3, bottom_left3, bottom_right3, bottom3);
         } else {
-            switchLed1(nume.substring(nume.length() - 3,nume.length() - 2));
-            switchLed2(nume.substring(nume.length() - 2,nume.length() - 1));
-            switchLed3(nume.substring(nume.length() - 1));
+            switchLed(nume.substring(nume.length() - 3,nume.length() - 2), top, top_left,
+                    top_right, middle, bottom_left, bottom_right, bottom);
+            switchLed(nume.substring(nume.length() - 2, nume.length() - 1), top2, top_left2,
+                    top_right2, middle2, bottom_left2, bottom_right2, bottom2);
+            switchLed(nume.substring(nume.length() - 1), top3, top_left3, top_right3, middle3,
+                    bottom_left3, bottom_right3, bottom3);
         }
     }
 
-    private void switchLed1(String numero) {
+    private void switchLed(String numero, View top, View top_left, View top_right, View middle,
+                            View bottom_left, View bottom_right, View bottom) {
         switch (numero) {
             case "1":
                 top.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
@@ -293,96 +299,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "0":
                 middle.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-        }
-    }
-    private void switchLed2(String numero) {
-        switch (numero) {
-            case "1":
-                top2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "2":
-                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "3":
-                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "4":
-                top2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "5":
-                top_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "6":
-                top_right2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "7":
-                top_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "8":
-                break;
-            case "9":
-                bottom_left2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "0":
-                middle2.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-        }
-    }
-    private void switchLed3(String numero) {
-        switch (numero) {
-            case "1":
-                top3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "2":
-                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "3":
-                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "4":
-                top3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "5":
-                top_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "6":
-                top_right3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "7":
-                top_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                bottom3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "8":
-                break;
-            case "9":
-                bottom_left3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
-                break;
-            case "0":
-                middle3.setBackgroundColor(ContextCompat.getColor(this, R.color.cinza_claro));
                 break;
         }
     }
