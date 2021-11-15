@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnEnviar, btnNovaPartida;
     private TextView tvQtdNumeros, tvStatus;
     private EditText etPalpite;
-    private int num;
+    private int numero;
     private int palpite;
     private Slider sliderTamanhoTexto;
     private View included1, included2, included3;
@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
                     btnNovaPartida.setVisibility(View.VISIBLE);
                     btnEnviar.setEnabled(false);
                 } else {
-                    num = Integer.parseInt(response.body().getValue());
-                    Log.i("TAG", "onResponse: " + num);
+                    numero = Integer.parseInt(response.body().getValue());
+                    Log.i("TAG", "onResponse: " + numero);
                 }
             }
 
@@ -193,9 +193,9 @@ public class MainActivity extends AppCompatActivity {
             palpite = Integer.parseInt(etPalpite.getText().toString());
             tvStatus.setVisibility(View.VISIBLE);
             pintaLed(palpite);
-            if (num < palpite) {
+            if (numero < palpite) {
                 tvStatus.setText(R.string.menor);
-            } else if (num > palpite) {
+            } else if (numero > palpite) {
                 tvStatus.setText(R.string.maior);
             } else {
                 tvStatus.setText(R.string.acertou);
