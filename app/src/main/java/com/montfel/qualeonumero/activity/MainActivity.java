@@ -18,16 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
+import com.montfel.qualeonumero.api.JsonPlaceHolderApi;
 import com.montfel.qualeonumero.R;
 import com.montfel.qualeonumero.model.Numero;
-import com.montfel.qualeonumero.service.HttpService;
 
-import java.util.concurrent.ExecutionException;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnEnviar, btnNovaPartida;
-    private TextView tvQtdNumeros, tvStatus, tvNumero;
+    private TextView tvQtdNumeros, tvStatus;
     private EditText etPalpite;
     private int num;
     private int palpite;
@@ -42,12 +46,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(getString(R.string.qual_numero));
-//        LedSeteSegmentos led = new LedSeteSegmentos(this);
         inicializaComponentes();
-        fazRequisicaoDeNumeroAleatorio();
         trataInput();
         realizaPalpite();
         jogaNovamente();
+        configuraRetrofit();
+    }
+
+    private void configuraRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://us-central1-ss-devops.cloudfunctions.net/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
+        Call<Numero> call = jsonPlaceHolderApi.getNumero();
+
+        call.enqueue(new Callback<Numero>() {
+            @Override
+            public void onResponse(Call<Numero> call, Response<Numero> response) {
+                if (!response.isSuccessful()) {
+                    tvStatus.setVisibility(View.VISIBLE);
+                    tvStatus.setText(R.string.erro);
+                    pintaLed(response.code());
+                    btnNovaPartida.setVisibility(View.VISIBLE);
+                    btnEnviar.setEnabled(false);
+                } else {
+                    num = Integer.parseInt(response.body().getValue());
+                    Log.i("TAG", "onResponse: " + num);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Numero> call, Throwable t) {
+                Log.i("TAG", "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     @Override
@@ -73,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onStopTrackingTouch(@NonNull Slider slider) {
-                        tvNumero.setTextSize((slider.getValue() * 20) + 40);
+//                        tvNumero.setTextSize((slider.getValue() * 20) + 40);
                     }
                 });
 
@@ -89,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         btnEnviar = findViewById(R.id.btnEnviar);
         btnNovaPartida = findViewById(R.id.btnNovaPartida);
         tvStatus = findViewById(R.id.tvStatus);
-//        tvNumero = findViewById(R.id.tvNumero);
         tvQtdNumeros = findViewById(R.id.tvQtdNumeros);
         etPalpite = findViewById(R.id.etPalpite);
         sliderTamanhoTexto = findViewById(R.id.sliderTamanhoTexto);
@@ -150,17 +184,15 @@ public class MainActivity extends AppCompatActivity {
         btnNovaPartida.setOnClickListener(view -> {
             btnNovaPartida.setVisibility(View.INVISIBLE);
             btnEnviar.setEnabled(true);
-            fazRequisicaoDeNumeroAleatorio();
+            configuraRetrofit();
         });
     }
 
     private void realizaPalpite() {
         btnEnviar.setOnClickListener(view -> {
-//            fazRequisicaoDeNumeroAleatorio();
             palpite = Integer.parseInt(etPalpite.getText().toString());
             tvStatus.setVisibility(View.VISIBLE);
             pintaLed(palpite);
-//            tvNumero.setText(String.valueOf(palpite));
             if (num < palpite) {
                 tvStatus.setText(R.string.menor);
             } else if (num > palpite) {
@@ -171,16 +203,6 @@ public class MainActivity extends AppCompatActivity {
                 btnEnviar.setEnabled(false);
             }
         });
-    }
-
-    private void fazRequisicaoDeNumeroAleatorio() {
-        try {
-            Numero numero = new HttpService().execute().get();
-            num = Integer.parseInt(numero.getValue());
-//            tvNumero.setText(numero.getValue());
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
     }
 
     public void pintaLed(int numero) {
