@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -14,9 +15,18 @@ import com.montfel.qualeonumero.R;
 
 public class LedSeteSegmentos extends View {
     private int color;
-    private static final int width = 100;
-    private static final int height = 400;
+    private final int x = 50;
+    private final int y = 50;
+    private final int width = 100;
+    private final int height = 400;
     private Paint paint;
+    private Rect top = new Rect(x + width, y, x + width + height, y + width);
+    private Rect top_left = new Rect(x, y, x + width, y + height);
+    private Rect top_right = new Rect(x + width + height, y, x + (2 * width) + height, y + height);
+    private Rect middle = new Rect(x + width, y + height - (width/2), x + width + height, y + height + (width/2));
+    private Rect bottom_left = new Rect(x, y + height, x + width, y + (2 * height));
+    private Rect bottom_right = new Rect(x + width + height, y + height, x + (2 * width) + height, y + (2 * height));
+    private Rect bottom = new Rect(x + width, y + (2 * height) - width, x + width + height, y + (2 * height));
 
     public LedSeteSegmentos(Context context) {
         super(context);
@@ -61,7 +71,13 @@ public class LedSeteSegmentos extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(50, 50, width, height, paint);
+        canvas.drawRect(top, paint);
+        canvas.drawRect(top_left, paint);
+        canvas.drawRect(top_right, paint);
+        canvas.drawRect(middle, paint);
+        canvas.drawRect(bottom_left, paint);
+        canvas.drawRect(bottom_right, paint);
+        canvas.drawRect(bottom, paint);
     }
 
     private void setupPaint() {
