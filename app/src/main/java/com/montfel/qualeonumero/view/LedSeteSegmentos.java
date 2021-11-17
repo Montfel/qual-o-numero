@@ -1,11 +1,11 @@
 package com.montfel.qualeonumero.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -14,19 +14,13 @@ import androidx.core.content.ContextCompat;
 import com.montfel.qualeonumero.R;
 
 public class LedSeteSegmentos extends View {
-    private int color;
-    private final int x = 50;
-    private final int y = 50;
-    private final int width = 100;
-    private final int height = 400;
-    private Paint paint;
-    private Rect top = new Rect(x + width, y, x + width + height, y + width);
-    private Rect top_left = new Rect(x, y, x + width, y + height);
-    private Rect top_right = new Rect(x + width + height, y, x + (2 * width) + height, y + height);
-    private Rect middle = new Rect(x + width, y + height - (width/2), x + width + height, y + height + (width/2));
-    private Rect bottom_left = new Rect(x, y + height, x + width, y + (2 * height));
-    private Rect bottom_right = new Rect(x + width + height, y + height, x + (2 * width) + height, y + (2 * height));
-    private Rect bottom = new Rect(x + width, y + (2 * height) - width, x + width + height, y + (2 * height));
+    private static final int x = 0;
+    private static final int y = 0;
+    private static final int width = 50;
+    private static final int height = 200;
+    private Paint paint_top, paint_top_left, paint_top_right, paint_middle, paint_bottom_left,
+                    paint_bottom_right, paint_bottom;
+    private Rect top, top_left, top_right, middle, bottom_left, bottom_right, bottom;
 
     public LedSeteSegmentos(Context context) {
         super(context);
@@ -34,62 +28,113 @@ public class LedSeteSegmentos extends View {
 
     public LedSeteSegmentos(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        setupAttributes(attrs);
-        setupPaint();
+        init(attrs);
     }
 
     public LedSeteSegmentos(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(attrs);
     }
 
     public LedSeteSegmentos(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
                             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init(attrs);
     }
 
-    private void setupAttributes(@Nullable AttributeSet attrs) {
-        TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs,
-                R.styleable.LedSeteSegmentos, 0, 0);
-        try {
-            color = a.getColor(R.styleable.LedSeteSegmentos_android_background,
-                    ContextCompat.getColor(getContext(), R.color.rosa_claro));
-        } finally {
-            a.recycle();
-        }
+    private void init(AttributeSet set) {
+        paint_top = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_top_left = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_top_right = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_middle = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_bottom_left = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_bottom_right = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint_bottom = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        top = new Rect(x + width, y, x + width + height, y + width);
+        top_left = new Rect(x, y, x + width, y + height);
+        top_right = new Rect(x + width + height, y, x + (2 * width) + height, y + height);
+        middle = new Rect(x + width, y + height - (width/2), x + width + height, y + height + (width/2));
+        bottom_left = new Rect(x, y + height, x + width, y + (2 * height));
+        bottom_right = new Rect(x + width + height, y + height, x + (2 * width) + height, y + (2 * height));
+        bottom = new Rect(x + width, y + (2 * height) - width, x + width + height, y + (2 * height));
     }
 
-    public int getColor() {
-        return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
-        invalidate();
-        requestLayout();
+    private void zeraCores() {
+        paint_top.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
+        paint_top_left.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
+        paint_top_right.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
+        paint_middle.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
+        paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
+        paint_bottom_right.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
+        paint_bottom.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(top, paint);
-        canvas.drawRect(top_left, paint);
-        canvas.drawRect(top_right, paint);
-        canvas.drawRect(middle, paint);
-        canvas.drawRect(bottom_left, paint);
-        canvas.drawRect(bottom_right, paint);
-        canvas.drawRect(bottom, paint);
+
+        canvas.drawRect(top, paint_top);
+        canvas.drawRect(top_left, paint_top_left);
+        canvas.drawRect(top_right, paint_top_right);
+        canvas.drawRect(middle, paint_middle);
+        canvas.drawRect(bottom_left, paint_bottom_left);
+        canvas.drawRect(bottom_right, paint_bottom_right);
+        canvas.drawRect(bottom, paint_bottom);
     }
 
-    private void setupPaint() {
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(color);
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//    }
+
+    public void switchColor(String numero) {
+        zeraCores();
+
+        switch (numero) {
+            case "1":
+                paint_top.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_top_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_middle.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "2":
+                paint_top_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom_right.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "3":
+                paint_top_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "4":
+                paint_top.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "5":
+                paint_top_right.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "6":
+                paint_top_right.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "7":
+                paint_top_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_middle.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                paint_bottom.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "8":
+                break;
+            case "9":
+                paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+            case "0":
+                paint_middle.setColor(ContextCompat.getColor(getContext(), R.color.cinza_claro));
+                break;
+        }
+        invalidate();
+        requestLayout();
     }
-
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-
 }

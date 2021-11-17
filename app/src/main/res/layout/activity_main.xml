@@ -20,43 +20,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/included1"
-        layout="@layout/led_sete_segmentos"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/included2"
+    <com.montfel.qualeonumero.view.LedSeteSegmentos
+        android:id="@+id/ledCentena"
+        android:layout_width="110dp"
+        android:layout_height="140dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ledDezena"
+        app:layout_constraintEnd_toStartOf="@+id/ledDezena"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/ledDezena" />
 
-    <include
-        android:id="@+id/included2"
-        layout="@layout/led_sete_segmentos2"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
+    <com.montfel.qualeonumero.view.LedSeteSegmentos
+        android:id="@+id/ledDezena"
+        android:layout_width="110dp"
+        android:layout_height="140dp"
         android:layout_marginEnd="8dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/included3"
+        app:layout_constraintBottom_toBottomOf="@+id/ledUnidade"
+        app:layout_constraintEnd_toStartOf="@+id/ledUnidade"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/included1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/ledCentena"
+        app:layout_constraintTop_toTopOf="@+id/ledUnidade" />
 
-    <include
-        android:id="@+id/included3"
-        layout="@layout/led_sete_segmentos3"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
+    <com.montfel.qualeonumero.view.LedSeteSegmentos
+        android:id="@+id/ledUnidade"
+        android:layout_width="110dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/included2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/ledDezena"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -108,7 +103,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/included3"
+        app:layout_constraintBottom_toTopOf="@+id/ledUnidade"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -121,6 +116,6 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/included3" />
+        app:layout_constraintTop_toBottomOf="@+id/ledUnidade" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
