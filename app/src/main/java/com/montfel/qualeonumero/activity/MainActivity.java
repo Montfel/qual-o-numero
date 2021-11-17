@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onStopTrackingTouch(@NonNull Slider slider) {
+//                    LedSeteSegmentos.width = (int) (slider.getValue() * 10);
+//                    LedSeteSegmentos.width = (int) (slider.getValue() * 40);
 //                        tvNumero.setTextSize((slider.getValue() * 20) + 40);
                 }
             });

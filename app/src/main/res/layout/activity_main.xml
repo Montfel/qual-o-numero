@@ -22,8 +22,8 @@
 
     <com.montfel.qualeonumero.view.LedSeteSegmentos
         android:id="@+id/ledCentena"
-        android:layout_width="110dp"
-        android:layout_height="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/ledDezena"
         app:layout_constraintEnd_toStartOf="@+id/ledDezena"
@@ -34,8 +34,8 @@
 
     <com.montfel.qualeonumero.view.LedSeteSegmentos
         android:id="@+id/ledDezena"
-        android:layout_width="110dp"
-        android:layout_height="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/ledUnidade"
         app:layout_constraintEnd_toStartOf="@+id/ledUnidade"
@@ -45,13 +45,13 @@
 
     <com.montfel.qualeonumero.view.LedSeteSegmentos
         android:id="@+id/ledUnidade"
-        android:layout_width="110dp"
-        android:layout_height="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ledDezena"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
