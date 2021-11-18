@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private int numero;
     private int palpite;
     private Slider sliderTamanhoTexto;
-    private final String BASE_URL = "https://us-central1-ss-devops.cloudfunctions.net/";
     private LedSeteSegmentos ledCentena, ledDezena, ledUnidade;
 
     @Override
@@ -62,12 +61,14 @@ public class MainActivity extends AppCompatActivity {
     //Configura ações aos botões ao serem pressionados
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //Verifica se o item selecionado foi o menu de alterar texto
+        //Verifica se o item selecionado foi o menu de alterar tamanho do texto
         if (item.getItemId() == R.id.menuTamanhoTexto) {
+            //Configura um toggle para tornar o slider visível caso ele esteja invisível e vice-versa
             boolean isSliderVisible = sliderTamanhoTexto.getVisibility() == View.VISIBLE;
-
             sliderTamanhoTexto.setVisibility(isSliderVisible ? View.INVISIBLE : View.VISIBLE);
 
+            // Configura um listener para setar a largura do elemento a partir do valor da opção
+            // selecionada no slider (que varia de 1 a 5) vezes 10
             sliderTamanhoTexto.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
                 @Override
                 public void onStartTrackingTouch(@NonNull Slider slider) {}
@@ -79,13 +80,16 @@ public class MainActivity extends AppCompatActivity {
                     ledCentena.setSize((int) (slider.getValue() * 10));
                 }
             });
-        } else {
+        //Verifica se o item selecionado foi o menu de alterar cor do texto
+        } else if (item.getItemId() == R.id.menuCorTexto) {
+            //Cria um dialog que possibilita escolher a cor do texto a partir de uma palheta de
+            // cores, e além disso possui botões de cancelar e confimar
             new ColorPickerPopup.Builder(this)
                     .initialColor(Color.RED) // Set initial color
                     .enableBrightness(true) // Enable brightness slider or not
                     .enableAlpha(true) // Enable alpha slider or not
-                    .okTitle("Choose")
-                    .cancelTitle("Cancel")
+                    .okTitle("Confirmar")
+                    .cancelTitle("Cancelar")
                     .showIndicator(true)
                     .showValue(true)
                     .build()
@@ -133,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                //Muda o textView para indicar o comprimento do input ao passo que o usuário interage com o campo de texto
+                //Muda o textView para indicar o comprimento do input ao passo que o usuário
+                // interage com o campo de texto
                 String tamanho = charSequence.length() + getString(R.string.slash_3);
                 tvQtdNumeros.setText(tamanho);
             }
@@ -144,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configuraRetrofit() {
+        //Configura url base para a requisição http
+        String BASE_URL = "https://us-central1-ss-devops.cloudfunctions.net/";
+
+        //Configura retrofit passando a url base e adicionando o conversor de Json para objeto
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -156,12 +165,16 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<Numero>() {
             @Override
             public void onResponse(@NonNull Call<Numero> call, @NonNull Response<Numero> response) {
+                //Caso a requisição não tenha o status 2xx, o status exibe o texto de erro, é exibido
+                // também o status code capturado nos leds e também é bloqueado o botão de enviar e
+                // liberado o botão de nova partida para realizar outra requisição
                 if (!response.isSuccessful()) {
                     tvStatus.setVisibility(View.VISIBLE);
                     tvStatus.setText(R.string.erro);
                     pintaLed(response.code());
                     btnNovaPartida.setVisibility(View.VISIBLE);
                     btnEnviar.setEnabled(false);
+                //Caso contrário, é salvo na variável global o número obtido
                 } else {
                     numero = Integer.parseInt(response.body().getValue());
                 }
@@ -176,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void realizaPalpite() {
         btnEnviar.setOnClickListener(view -> {
-            //Verifica se o editText é nulo ao pressionar o botão
+            //Verifica se o editText é vazio ao pressionar o botão enviar
             if (!etPalpite.getText().toString().equals("")) {
                 palpite = Integer.parseInt(etPalpite.getText().toString());
                 tvStatus.setVisibility(View.VISIBLE);
@@ -198,7 +211,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void jogaNovamente() {
         btnNovaPartida.setOnClickListener(view -> {
-            //Realiza outra requisição, esconde o botão de nova partida e desbloqueia o botão de enviar palpite
+            //Realiza outra requisição, esconde o botão de nova partida e desbloqueia o botão de
+            // enviar palpite
             btnNovaPartida.setVisibility(View.INVISIBLE);
             btnEnviar.setEnabled(true);
             configuraRetrofit();
@@ -210,8 +224,12 @@ public class MainActivity extends AppCompatActivity {
         ledDezena.setVisibility(View.VISIBLE);
 
         String nume = String.valueOf(numero);
+        //Sempre a unidade do número é chamada, pois não existe um número inteiro sem unidade
         ledUnidade.switchColor(nume.substring(nume.length() - 1));
 
+        //Exibe a quantidade de elementos a depender do valor do número e exibe o valor nos leds,
+        // puxando os valores individualmente de trás para frente, para que o usuário possar digitar
+        // 029 ou 29 e obter o mesmo resultado
         if (numero < 10) {
             ledCentena.setVisibility(View.GONE);
             ledDezena.setVisibility(View.GONE);

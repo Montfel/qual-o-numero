@@ -75,15 +75,6 @@ public class LedSeteSegmentos extends View {
         bottom = new Rect(width, (2 * height) - width, width + height, (2 * height));
     }
 
-    private void zeraCores() {
-        paint_top.setColor(colorEnable);
-        paint_top_left.setColor(colorEnable);
-        paint_top_right.setColor(colorEnable);
-        paint_middle.setColor(colorEnable);
-        paint_bottom_left.setColor(colorEnable);
-        paint_bottom_right.setColor(colorEnable);
-        paint_bottom.setColor(colorEnable);
-    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -158,6 +149,16 @@ public class LedSeteSegmentos extends View {
         }
         postInvalidate();
         requestLayout();
+    }
+
+    private void zeraCores() {
+        paint_top.setColor(colorEnable);
+        paint_top_left.setColor(colorEnable);
+        paint_top_right.setColor(colorEnable);
+        paint_middle.setColor(colorEnable);
+        paint_bottom_left.setColor(colorEnable);
+        paint_bottom_right.setColor(colorEnable);
+        paint_bottom.setColor(colorEnable);
     }
 
     public void setSize(int width) {
