@@ -1,12 +1,11 @@
 package com.montfel.qualeonumero.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -15,8 +14,10 @@ import androidx.core.content.ContextCompat;
 import com.montfel.qualeonumero.R;
 
 public class LedSeteSegmentos extends View {
-    public static int width = 40;
-    public static int height = 160;
+    private int width = 30;
+    private int height = 120;
+//    private int color;
+    private int color = ContextCompat.getColor(getContext(), R.color.rosa_claro);
     private Paint paint_top, paint_top_left, paint_top_right, paint_middle, paint_bottom_left,
                     paint_bottom_right, paint_bottom;
     private Rect top, top_left, top_right, middle, bottom_left, bottom_right, bottom;
@@ -41,6 +42,21 @@ public class LedSeteSegmentos extends View {
         init(attrs);
     }
 
+    public void setSize(int width) {
+        this.width = width;
+        this.height = width * 4;
+        configuraTamanho();
+        postInvalidate();
+        requestLayout();
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+        zeraCores();
+        postInvalidate();
+        requestLayout();
+    }
+
     private void init(AttributeSet set) {
         paint_top = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint_top_left = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -50,6 +66,21 @@ public class LedSeteSegmentos extends View {
         paint_bottom_right = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint_bottom = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+        configuraTamanho();
+
+//        if (set == null) {
+//            return;
+//        }
+
+//        TypedArray ta = getContext().obtainStyledAttributes(set, R.styleable.LedSeteSegmentos);
+//
+//        int color = ta.getColor(R.styleable.LedSeteSegmentos_color, ContextCompat.getColor(getContext(),
+//                R.color.rosa_claro));
+//
+//        ta.recycle();
+    }
+
+    private void configuraTamanho() {
         top = new Rect(width, 0, width + height, width);
         top_left = new Rect(0, 0, width, height);
         top_right = new Rect(width + height, 0, (2 * width) + height, height);
@@ -57,26 +88,16 @@ public class LedSeteSegmentos extends View {
         bottom_left = new Rect(0, height, width, 2 * height);
         bottom_right = new Rect(width + height, height, (2 * width) + height, 2 * height);
         bottom = new Rect(width, (2 * height) - width, width + height, (2 * height));
-
-        if (set == null) {
-            return;
-        }
-
-        TypedArray ta = getContext().obtainStyledAttributes(set, R.styleable.LedSeteSegmentos);
-
-//        int color = ta.getColor(R.styleable.LedSeteSegmentos_color, )
-
-        ta.recycle();
     }
 
     private void zeraCores() {
-        paint_top.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
-        paint_top_left.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
-        paint_top_right.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
-        paint_middle.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
-        paint_bottom_left.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
-        paint_bottom_right.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
-        paint_bottom.setColor(ContextCompat.getColor(getContext(), R.color.rosa_claro));
+        paint_top.setColor(color);
+        paint_top_left.setColor(color);
+        paint_top_right.setColor(color);
+        paint_middle.setColor(color);
+        paint_bottom_left.setColor(color);
+        paint_bottom_right.setColor(color);
+        paint_bottom.setColor(color);
     }
 
     @Override

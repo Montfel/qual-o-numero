@@ -3,6 +3,7 @@ package com.montfel.qualeonumero.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import top.defaults.colorpicker.ColorPickerPopup;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,12 +74,29 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onStopTrackingTouch(@NonNull Slider slider) {
-//                    LedSeteSegmentos.width = (int) (slider.getValue() * 10);
-//                    LedSeteSegmentos.width = (int) (slider.getValue() * 40);
-//                        tvNumero.setTextSize((slider.getValue() * 20) + 40);
+                    ledUnidade.setSize((int) (slider.getValue() * 10));
+                    ledDezena.setSize((int) (slider.getValue() * 10));
+                    ledCentena.setSize((int) (slider.getValue() * 10));
                 }
             });
-
+        } else {
+            new ColorPickerPopup.Builder(this)
+                    .initialColor(Color.RED) // Set initial color
+                    .enableBrightness(true) // Enable brightness slider or not
+                    .enableAlpha(true) // Enable alpha slider or not
+                    .okTitle("Choose")
+                    .cancelTitle("Cancel")
+                    .showIndicator(true)
+                    .showValue(true)
+                    .build()
+                    .show(new ColorPickerPopup.ColorPickerObserver() {
+                        @Override
+                        public void onColorPicked(int color) {
+                            ledUnidade.setColor(color);
+                            ledDezena.setColor(color);
+                            ledCentena.setColor(color);
+                        }
+                    });
         }
 
         return super.onOptionsItemSelected(item);
@@ -191,19 +210,17 @@ public class MainActivity extends AppCompatActivity {
         ledDezena.setVisibility(View.VISIBLE);
 
         String nume = String.valueOf(numero);
+        ledUnidade.switchColor(nume.substring(nume.length() - 1));
 
         if (numero < 10) {
             ledCentena.setVisibility(View.GONE);
             ledDezena.setVisibility(View.GONE);
-            ledUnidade.switchColor(nume.substring(nume.length() - 1));
         } else if (numero < 100) {
             ledCentena.setVisibility(View.GONE);
             ledDezena.switchColor(nume.substring(nume.length() - 2, nume.length() - 1));
-            ledUnidade.switchColor(nume.substring(nume.length() - 1));
         } else {
             ledCentena.switchColor(nume.substring(nume.length() - 3,nume.length() - 2));
             ledDezena.switchColor(nume.substring(nume.length() - 2, nume.length() - 1));
-            ledUnidade.switchColor(nume.substring(nume.length() - 1));
         }
     }
 }
