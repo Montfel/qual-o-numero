@@ -2,6 +2,7 @@ package com.montfel.qualeonumero.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -85,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
             //Cria um dialog que possibilita escolher a cor do texto a partir de uma palheta de
             // cores, e além disso possui botões de cancelar e confimar
             new ColorPickerPopup.Builder(this)
-                    .initialColor(Color.RED) // Set initial color
-                    .enableBrightness(true) // Enable brightness slider or not
-                    .enableAlpha(true) // Enable alpha slider or not
+                    .initialColor(ContextCompat.getColor(this, R.color.rosa_claro))
+                    .enableBrightness(true)
+                    .enableAlpha(false)
                     .okTitle("Confirmar")
                     .cancelTitle("Cancelar")
                     .showIndicator(true)
-                    .showValue(true)
+                    .showValue(false)
                     .build()
                     .show(new ColorPickerPopup.ColorPickerObserver() {
                         @Override
