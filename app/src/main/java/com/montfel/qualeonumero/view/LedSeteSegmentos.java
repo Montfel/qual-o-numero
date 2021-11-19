@@ -54,6 +54,11 @@ public class LedSeteSegmentos extends View {
     }
 
     private void configuraTamanho() {
+        //Configura os tamanhos dos retangulos formando um número nesse formato:
+        //   _
+        //  |_|
+        //  |_|
+        //
         top = new Rect(width, 0, width + height, width);
         top_left = new Rect(0, 0, width, height);
         top_right = new Rect(width + height, 0, (2 * width) + height, height);
@@ -63,7 +68,7 @@ public class LedSeteSegmentos extends View {
         bottom = new Rect(width, (2 * height) - width, width + height, (2 * height));
     }
 
-
+    // Desenha os retângulos na tela com uma cor padrão
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -77,6 +82,7 @@ public class LedSeteSegmentos extends View {
         canvas.drawRect(bottom, paint_bottom);
     }
 
+    // Configura tamanho da Custom View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int minw = (2 * width) + height + getPaddingLeft() + getPaddingRight();
@@ -92,6 +98,7 @@ public class LedSeteSegmentos extends View {
 
         zeraCores();
 
+        // Despinta alguns segmentos para formar o número a depender do número recebido
         switch (numero) {
             case "0":
                 paint_middle.setColor(colorDisable);
@@ -139,6 +146,7 @@ public class LedSeteSegmentos extends View {
         requestLayout();
     }
 
+    // Deixa o elemento todo pintado para que seja despintado e forme o número
     private void zeraCores() {
         paint_top.setColor(colorEnable);
         paint_top_left.setColor(colorEnable);
@@ -149,6 +157,7 @@ public class LedSeteSegmentos extends View {
         paint_bottom.setColor(colorEnable);
     }
 
+    // Modifica o tamanho a partir do parâmetro passado e atualiza a View
     public void setSize(int width) {
         this.width = width;
         this.height = width * 6;
@@ -157,6 +166,7 @@ public class LedSeteSegmentos extends View {
         requestLayout();
     }
 
+    // Modifica a cor a partir do parâmetro e atualiza a View
     public void setColor(int color) {
         paint_top.setColor(paint_top.getColor() == colorEnable ? color : colorDisable);
         paint_top_left.setColor(paint_top_left.getColor() == colorEnable ? color : colorDisable);
