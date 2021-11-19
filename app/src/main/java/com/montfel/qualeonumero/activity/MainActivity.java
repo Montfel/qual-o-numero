@@ -69,16 +69,16 @@ public class MainActivity extends AppCompatActivity {
             sliderTamanhoTexto.setVisibility(isSliderVisible ? View.INVISIBLE : View.VISIBLE);
 
             // Configura um listener para setar a largura do elemento a partir do valor da opção
-            // selecionada no slider (que varia de 1 a 5) vezes 10
+            // selecionada no slider (que varia de 1 a 5)
             sliderTamanhoTexto.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
                 @Override
                 public void onStartTrackingTouch(@NonNull Slider slider) {}
 
                 @Override
                 public void onStopTrackingTouch(@NonNull Slider slider) {
-                    ledUnidade.setSize((int) (slider.getValue() * 10));
-                    ledDezena.setSize((int) (slider.getValue() * 10));
-                    ledCentena.setSize((int) (slider.getValue() * 10));
+                    ledUnidade.setSize((int) ((slider.getValue() * 5) + 5));
+                    ledDezena.setSize((int) ((slider.getValue() * 5) + 5));
+                    ledCentena.setSize((int) ((slider.getValue() * 5) + 5));
                 }
             });
         //Verifica se o item selecionado foi o menu de alterar cor do texto

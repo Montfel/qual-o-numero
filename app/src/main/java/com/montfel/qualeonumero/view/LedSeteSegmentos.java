@@ -13,8 +13,8 @@ import androidx.core.content.ContextCompat;
 import com.montfel.qualeonumero.R;
 
 public class LedSeteSegmentos extends View {
-    private int width = 30;
-    private int height = this.width * 4;
+    private int width = 20;
+    private int height = this.width * 6;
     private int colorEnable = ContextCompat.getColor(getContext(), R.color.rosa_claro);
     private final int colorDisable = ContextCompat.getColor(getContext(), R.color.cinza_claro);
     private Paint paint_top, paint_top_left, paint_top_right, paint_middle, paint_bottom_left,
@@ -151,7 +151,7 @@ public class LedSeteSegmentos extends View {
 
     public void setSize(int width) {
         this.width = width;
-        this.height = width * 4;
+        this.height = width * 6;
         configuraTamanho();
         postInvalidate();
         requestLayout();
